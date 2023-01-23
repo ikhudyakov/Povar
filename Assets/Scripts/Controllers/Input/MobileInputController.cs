@@ -14,11 +14,13 @@ namespace Controllers.GameInput
             SpriteAnimatorController playerAnimator, 
             ContactPoller contactPoller, 
             Transform parent, 
-            PauseMenuController pauseMenuController) : base(
+            PauseMenuController pauseMenuController,
+            GunController gunController) : base(
                 playerView, 
                 playerAnimator, 
                 contactPoller, 
-                pauseMenuController)
+                pauseMenuController,
+                gunController)
         {
             Addressables.LoadAssetAsync<GameObject>("Prefabs/MobileGameInput").Completed += OnLoadInputViewDone;
             _parent = parent;

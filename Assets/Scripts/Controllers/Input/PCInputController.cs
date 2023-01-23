@@ -13,11 +13,13 @@ namespace Controllers.GameInput
             PlayerView playerView, 
             SpriteAnimatorController playerAnimator, 
             ContactPoller contactPoller, 
-            PauseMenuController pauseMenuController) : base(
+            PauseMenuController pauseMenuController,
+            GunController gunController) : base(
                 playerView, 
                 playerAnimator, 
                 contactPoller, 
-                pauseMenuController)
+                pauseMenuController,
+                gunController)
         {
             Addressables.LoadAssetAsync<GameObject>("Prefabs/PCGameInput").Completed += OnLoadInputViewDone;
         }

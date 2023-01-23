@@ -11,6 +11,7 @@ namespace Controllers.GameInput
         internal PlayerView _playerView;
         internal SpriteAnimatorController _playerAnimator;
         internal ContactPoller _contactPoller;
+        internal GunController _gunController;
         internal BaseInputView _inputView;
         internal PauseMenuView _pauseMenuView;
         internal float _xAxisInput;
@@ -24,10 +25,16 @@ namespace Controllers.GameInput
         internal bool _isJump;
         internal bool _isMoving;
         internal bool _isDone;
+        internal bool _isFire;
         internal readonly Vector3 _leftScale = new Vector3(-1, 1, 1);
         internal readonly Vector3 _rightScale = new Vector3(1, 1, 1);
 
-        public BaseInputController(PlayerView playerView, SpriteAnimatorController playerAnimator, ContactPoller contactPoller, PauseMenuController pauseMenuController)
+        public BaseInputController(
+            PlayerView playerView, 
+            SpriteAnimatorController playerAnimator, 
+            ContactPoller contactPoller, 
+            PauseMenuController pauseMenuController, 
+            GunController gunController)
         {
             _walkSpeed = 100f;
             _animationSpeed = 30f;
@@ -39,6 +46,7 @@ namespace Controllers.GameInput
             _playerView = playerView;
             _playerAnimator = playerAnimator;
             _contactPoller = contactPoller;
+            _gunController = gunController;
             _pauseMenuView = pauseMenuController.PauseMenuView;
             _playerAnimator?.StartAnimation(_playerView._spriteRenderer, AnimState.Idle, true, _animationSpeed);
         }
@@ -59,10 +67,16 @@ namespace Controllers.GameInput
                 _isJump = _inputView.IsJump;
                 _yVelocity = _playerView._rigidbody.velocity.y;
                 _isMoving = Mathf.Abs(_xAxisInput) > _movingTreshold;
+                _isFire = _inputView.IsFire;
 
                 if (_isMoving)
                 {
                     MoveTowards();
+                }
+
+                if (_isFire)
+                {
+                    _gunController.Fire();
                 }
 
                 if (_contactPoller.IsGrounded)

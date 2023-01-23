@@ -18,6 +18,7 @@ namespace Controllers
         private CameraController _cameraConctroller;
         private SpriteAnimatorConfig _playerConfig;
         private SpriteAnimatorController _playerAnimator;
+        private GunController _gunController;
 
         public PlayerView PlayerView => _playerView;
 
@@ -42,12 +43,13 @@ namespace Controllers
             var prefab = temp.GetComponent<PlayerView>();
             _playerView = GameObject.Instantiate(prefab);
             AddGameObjects(_playerView.gameObject);
+            _gunController = new GunController(_playerView._gunPoint, _playerView._bullet);
             _contactPoller = new ContactPoller(_playerView._collider);
             _cameraConctroller = new CameraController(PlayerView._transform, Camera.main.transform);
             if (Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.WindowsPlayer)
-                _inputController = new PCInputController(_playerView, _playerAnimator, _contactPoller, _pauseMenuController);
+                _inputController = new PCInputController(_playerView, _playerAnimator, _contactPoller, _pauseMenuController, _gunController);
             if (Application.platform == RuntimePlatform.Android)
-                _inputController = new MobileInputController(_playerView, _playerAnimator, _contactPoller, _parent, _pauseMenuController);
+                _inputController = new MobileInputController(_playerView, _playerAnimator, _contactPoller, _parent, _pauseMenuController, _gunController);
         }
 
         public override void Dispose()

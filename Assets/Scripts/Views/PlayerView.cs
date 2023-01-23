@@ -9,6 +9,8 @@ namespace Views
         public SpriteRenderer _spriteRenderer;
         public Collider2D _collider;
         public Rigidbody2D _rigidbody;
+        public Transform _gunPoint;
+        public GameObject _bullet;
 
         public Action<PlayerView> OnLevelObjectContact { get; set; }
 

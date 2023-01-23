@@ -8,6 +8,7 @@ namespace Views.GameInput
 
         public float XAxisInput { get; set; }
         public bool IsJump { get; set; }
+        public bool IsFire { get; set; }
 
         public virtual void Init(PauseMenuView pauseMenuView)
         {

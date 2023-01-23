@@ -107,3 +107,5 @@ MonoBehaviour:
       value: 192.168.137.1
     - key: PrivateIpAddress_1
       value: 192.168.1.120
+    - key: PrivateIpAddress_2
+      value: 172.31.160.1

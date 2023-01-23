@@ -19,6 +19,8 @@ namespace Views.GameInput
             {
                 ShowPauseMenu();
             }
+
+            IsFire = Input.GetKey(KeyCode.Space);
         }
     }
 }
